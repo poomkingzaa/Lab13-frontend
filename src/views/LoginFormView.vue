@@ -41,6 +41,7 @@
 <script>
 import { Form, Field, ErrorMessage } from 'vee-validate'
 import * as yup from 'yup'
+import AuthServices from '@/services/AuthServices.js'
 export default {
   name: 'LongView',
   components: {
@@ -57,6 +58,13 @@ export default {
       loading: false,
       message: '',
       schema
+    }
+  },
+  methods: {
+    handleLogin(user) {
+      AuthServices.login(user).then(() => {
+        this.$router.push({ name: 'EventList' })
+      })
     }
   }
 }
