@@ -3,18 +3,22 @@
     <div class="card card-container">
       <img
         id="profile-img"
-        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+        src="//ssl.gstatic.com/acounts/ui/avatar_2x.png"
         class="profile-img-card"
       />
       <Form @submit="handleLogin" :validation-schema="schema">
         <div class="form-group">
           <label for="username">Username</label>
+
           <Field name="username" type="text" class="form-control" />
+
           <ErrorMessage name="username" class="error-feedback" />
         </div>
         <div class="form-group">
           <label for="password">Password</label>
+
           <Field name="password" type="password" class="form-control" />
+
           <ErrorMessage name="password" class="error-feedback" />
         </div>
 
@@ -24,10 +28,10 @@
               v-show="loading"
               class="spinner-border spinner-border-sm"
             ></span>
+
             <span>Login</span>
           </button>
         </div>
-
         <div class="form-group">
           <div v-if="message" class="alert alert-danger" role="alert">
             {{ message }}
@@ -41,9 +45,9 @@
 <script>
 import { Form, Field, ErrorMessage } from 'vee-validate'
 import * as yup from 'yup'
-import AuthServices from '@/services/AuthServices.js'
+import AuthService from '@/services/AuthServices.js'
 export default {
-  name: 'LongView',
+  name: 'LoginView',
   components: {
     Form,
     Field,
@@ -52,7 +56,7 @@ export default {
   data() {
     const schema = yup.object().shape({
       username: yup.string().required('Username is required!'),
-      password: yup.string().required('Password is required')
+      password: yup.string().required('Password is required!')
     })
     return {
       loading: false,
@@ -62,7 +66,9 @@ export default {
   },
   methods: {
     handleLogin(user) {
-      AuthServices.login(user).then(() => {
+      console.log(user)
+      AuthService.login(user).then(() => {
+        console.log(12)
         this.$router.push({ name: 'EventList' })
       })
     }
@@ -88,7 +94,7 @@ label {
   -webkit-border-radius: 2px;
   border-radius: 2px;
   -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  -webkit-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
 }
 .profile-img-card {
